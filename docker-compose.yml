@@ -1,0 +1,86 @@
+services:
+  Nextcloud:
+    container_name: Nextcloud
+    image: nextcloud
+    restart: unless-stopped
+    networks:
+      - Nextcloud
+      - Redis
+      - MariaDB
+    environment:
+      - MYSQL_DATABASE=DB
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_HOST=DB
+      - NEXTCLOUD_ADMIN_USER=${ADMIN_USER}
+      - NEXTCLOUD_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - REDIS_HOST=Redis
+      - NEXTCLOUD_TRUSTED_DOMAINS=${HOST}
+      - TRUSTED_PROXIES=${TRUSTED_PROXIES}
+      - OVERWRITEHOST=${HOST}
+      - OVERWRITEPROTOCOL=https
+      - OVERWRITECLIURL=https://${HOST}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_SECURE=tls
+      - SMTP_PORT=587
+      - SMTP_NAME=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - MAIL_FROM_ADDRESS=nextcloud
+      - MAIL_DOMAIN=${MAIL_DOMAIN}
+      - PHP_MEMORY_LIMIT=4096M
+      - PHP_UPLOAD_LIMIT=32G
+      - APACHE_DISABLE_REWRITE_IP=1
+      - APACHE_BODY_LIMIT=0
+    depends_on:
+      - DB
+      - Redis
+    volumes:
+      - ${NEXTCLOUD_VOLUMES}/data:/var/www/html
+    deploy:
+      resources:
+        limits: 
+          cpus: '2.0'
+          memory: 1GB
+
+  DB:
+    container_name: DB
+    image: mariadb:latest
+    restart: unless-stopped
+    networks:
+      - MariaDB
+    environment:
+      - MYSQL_DATABASE=DB
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ADMIN_PASSWORD}
+    volumes:
+      - ${NEXTCLOUD_VOLUMES}/database:/var/lib/mysql
+    deploy:
+      resources:
+        limits: 
+          cpus: '1.0'
+          memory: 512M
+
+  Redis:
+    container_name: Redis
+    image: redis
+    restart: unless-stopped
+    networks:
+      - Redis
+    command: redis-server
+    deploy:
+      resources:
+        limits: 
+          cpus: '0.75'
+          memory: 512M
+
+networks:
+  Nextcloud:
+    name: Nextcloud
+    external: true
+  Redis:
+    name: Redis
+    external: true
+  MariaDB:
+    name: MariaDB
+    external: true
