@@ -4,7 +4,7 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
 
 ## Docker Networks Information  
 
-* The Docker Compose file assumes you have already created Docker networks called ```Nextcloud```, ```Redis```, and ```MariaDB```. You can create a network before starting the container by executing the following command: ```docker network create <NETWORK_NAME>```  
+* The Docker Compose file assumes you have already created Docker networks called ```Nextcloud```, ```Redis```, and ```MariaDB```. You can create these networks before starting the Compose file by executing the following command: ```docker network create <NETWORK_NAME>```  
 
 ## Environment Variables Configuration  
 
