@@ -1,6 +1,6 @@
 # Nextcloud Docker Compose Configuration  
 
-A sample Docker Compose file for Nextcloud.  
+A sample Docker Compose file for Nextcloud, Redis, and MariaDB.  
 
 ## Important Details  
 
