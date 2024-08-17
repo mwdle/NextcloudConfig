@@ -4,7 +4,7 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
 
 ## Docker Networks Information  
 
-* The Docker Compose file assumes you have already created Docker networks called ```Nextcloud```, ```Redis```, and ```MariaDB```. You can create a network before starting the container by executing the following command: ```docker network create <NETWORK_NAME>```   
+* The Docker Compose file assumes you have already created Docker networks called ```Nextcloud```, ```Redis```, and ```MariaDB```. You can create a network before starting the container by executing the following command: ```docker network create <NETWORK_NAME>```  
 
 ## Environment Variables Configuration  
 
@@ -28,7 +28,7 @@ TRUSTED_PROXIES="<YOUR_TRUSTED_PROXY_IP_RANGE>"
 ## Starting the container  
 
 In your terminal, ```cd``` to the directory containing the ```docker-compose.yml``` and ```.env``` files. Run the following command: ```docker compose up -d```  
-Your containers should be up and running and your Nextcloud instance be accessible on port 80 in the container. Setup your Docker Networks and reverse proxy accordingly.
+Your containers should be up and running and your Nextcloud instance be accessible on port 80 in the container. Setup your Docker Networks and reverse proxy accordingly.  
 
 ## Disclaimer  
 
