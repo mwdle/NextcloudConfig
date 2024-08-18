@@ -35,7 +35,7 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
     ```  
 
 3. Open a terminal in the directory containing the docker-compose file.  
-4. Create a docker network for the container:  
+4. Create docker networks for the containers:  
 
     ```shell
     docker network create Nextcloud
