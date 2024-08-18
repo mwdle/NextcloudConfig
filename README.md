@@ -20,16 +20,16 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
 2. Create a file called ```.env``` in the same directory as the Docker Compose file containing the following properties:  
 
     ```properties
-    NEXTCLOUD_VOLUMES=<PATH_TO_NEXTCLOUD_VOLUMES_FOLDER> # A folder on your system to store bind mounts for Nextcloud Docker containers.
-    MAIL_DOMAIN=<YOUR_DOMAIN.COM>
-    HOST=<YOUR_HOST.YOUR_DOMAIN.COM>
-    DB_USER=<YOUR_DB_USER>
-    DB_PASSWORD=<YOUR_DB_PASSWORD>
-    DB_ADMIN_PASSWORD=<YOUR_ADMIN_PASSWORD>
+    NEXTCLOUD_VOLUMES="<PATH_TO_NEXTCLOUD_VOLUMES_FOLDER>" # A folder on your system to store bind mounts for Nextcloud Docker containers.
+    MAIL_DOMAIN="<YOUR_DOMAIN.COM>"
+    HOST="<YOUR_HOST.YOUR_DOMAIN.COM>"
+    DB_USER="<YOUR_DB_USER>"
+    DB_PASSWORD="<YOUR_DB_PASSWORD>"
+    DB_ADMIN_PASSWORD="<YOUR_ADMIN_PASSWORD>"
     SMTP_HOST="<YOUR_SMTP_HOST>"
     SMTP_USER="<YOUR_SMTP_USER>"
     SMTP_PASSWORD="<YOUR_SMTP_PASSWORD>"
-    ADMIN_USER=<YOUR_ADMIN_USER>
+    ADMIN_USER="<YOUR_ADMIN_USER>"
     ADMIN_PASSWORD="<YOUR_ADMIN_PASSWORD>"
     TRUSTED_PROXIES="<YOUR_TRUSTED_PROXY_IP_RANGE>"
     ```  
