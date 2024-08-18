@@ -49,7 +49,7 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
     docker compose up -d
     ```  
 
-Your containers should be up and running and your Nextcloud instance be accessible on port 80 in the container. Setup your Docker Networks and reverse proxy accordingly.  
+Your containers should be up and running and your Nextcloud instance be accessible on port 80 in the container. Attach your reverse proxy container to the previously created Nextcloud Docker Network and configure it accordingly.  
 
 ## License  
 
