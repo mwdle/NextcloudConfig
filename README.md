@@ -2,33 +2,58 @@
 
 A sample Docker Compose file for Nextcloud, Redis, and MariaDB.  
 
-## Docker Networks Information  
+## Table of Contents  
 
-* The Docker Compose file assumes you have already created Docker networks called ```Nextcloud```, ```Redis```, and ```MariaDB```. You can create these networks before starting the Compose file by executing the following command: ```docker network create <NETWORK_NAME>```  
+* [Description](#nextcloud-docker-compose-configuration)  
+* [Getting Started](#getting-started)  
+* [License](#license)  
+* [Disclaimer](#disclaimer)  
 
-## Environment Variables Configuration  
+## Getting Started  
 
-Create a file called ```.env``` in the same directory as the Docker Compose file containing the following properties:  
+1. Clone the repository:  
 
-```env
-NEXTCLOUD_VOLUMES=<DOCKER_BIND_MOUNTS_PATH>
-MAIL_DOMAIN=<YOUR_DOMAIN.COM>
-HOST=<YOUR_HOST.YOUR_DOMAIN.COM>
-DB_USER=<YOUR_DB_USER>
-DB_PASSWORD=<YOUR_DB_PASSWORD>
-DB_ADMIN_PASSWORD=<YOUR_ADMIN_PASSWORD>
-SMTP_HOST="<YOUR_SMTP_HOST>"
-SMTP_USER="<YOUR_SMTP_USER>"
-SMTP_PASSWORD="<YOUR_SMTP_PASSWORD>"
-ADMIN_USER=<YOUR_ADMIN_USER>
-ADMIN_PASSWORD="<YOUR_ADMIN_PASSWORD>"
-TRUSTED_PROXIES="<YOUR_TRUSTED_PROXY_IP_RANGE>"
-```
+    ```shell
+    git clone https://github.com/mwdle/NextcloudConfig.git
+    ```  
 
-## Starting the container  
+2. Create a file called ```.env``` in the same directory as the Docker Compose file containing the following properties:  
 
-In your terminal, ```cd``` to the directory containing the ```docker-compose.yml``` and ```.env``` files. Run the following command: ```docker compose up -d```  
+    ```properties
+    NEXTCLOUD_VOLUMES=<PATH_TO_NEXTCLOUD_VOLUMES_FOLDER> # A folder on your system to store bind mounts for Nextcloud Docker containers.
+    MAIL_DOMAIN=<YOUR_DOMAIN.COM>
+    HOST=<YOUR_HOST.YOUR_DOMAIN.COM>
+    DB_USER=<YOUR_DB_USER>
+    DB_PASSWORD=<YOUR_DB_PASSWORD>
+    DB_ADMIN_PASSWORD=<YOUR_ADMIN_PASSWORD>
+    SMTP_HOST="<YOUR_SMTP_HOST>"
+    SMTP_USER="<YOUR_SMTP_USER>"
+    SMTP_PASSWORD="<YOUR_SMTP_PASSWORD>"
+    ADMIN_USER=<YOUR_ADMIN_USER>
+    ADMIN_PASSWORD="<YOUR_ADMIN_PASSWORD>"
+    TRUSTED_PROXIES="<YOUR_TRUSTED_PROXY_IP_RANGE>"
+    ```  
+
+3. Open a terminal in the directory containing the docker-compose file.  
+4. Create a docker network for the container:  
+
+    ```shell
+    docker network create Nextcloud
+    docker network create Redis
+    docker network create MariaDB
+    ```  
+
+5. Start the containers:  
+
+    ```shell
+    docker compose up -d
+    ```  
+
 Your containers should be up and running and your Nextcloud instance be accessible on port 80 in the container. Setup your Docker Networks and reverse proxy accordingly.  
+
+## License  
+
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0). See the [LICENSE](LICENSE.txt) file for details.  
 
 ## Disclaimer  
 
