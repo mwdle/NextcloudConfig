@@ -35,7 +35,7 @@ services:
       - DB
       - Redis
     volumes:
-      - ${NEXTCLOUD_VOLUMES}/data:/var/www/html
+      - ${DOCKER_VOLUMES}/Nextcloud/data:/var/www/html
     deploy:
       resources:
         limits: 
@@ -54,7 +54,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_ADMIN_PASSWORD}
     volumes:
-      - ${NEXTCLOUD_VOLUMES}/database:/var/lib/mysql
+      - ${DOCKER_VOLUMES}/Nextcloud/database:/var/lib/mysql
     deploy:
       resources:
         limits: 

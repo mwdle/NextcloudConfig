@@ -17,10 +17,19 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
     git clone https://github.com/mwdle/NextcloudConfig.git
     ```  
 
-2. Create a file called ```.env``` in the same directory as the Docker Compose file containing the following properties:  
+2. Create a folder on your system for Docker bind mounts / storing container files. The folder should have the following structure:  
+
+    ```shell
+    docker_volumes/
+    ├── Nextcloud/
+    │   ├── data/
+    │   └── database/
+    ```  
+
+3. Create a file called ```.env``` in the same directory as the Docker Compose file containing the following properties:  
 
     ```properties
-    NEXTCLOUD_VOLUMES="<PATH_TO_NEXTCLOUD_VOLUMES_FOLDER>" # A folder on your system to store bind mounts for Nextcloud Docker containers.
+    DOCKER_VOLUMES=<PATH_TO_DOCKER_VOLUMES_FOLDER> # The folder created in the previous step.
     MAIL_DOMAIN="<YOUR_DOMAIN.COM>"
     HOST="<YOUR_HOST.YOUR_DOMAIN.COM>"
     DB_USER="<YOUR_DB_USER>"
@@ -34,8 +43,8 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
     TRUSTED_PROXIES="<YOUR_TRUSTED_PROXY_IP_RANGE>"
     ```  
 
-3. Open a terminal in the directory containing the docker-compose file.  
-4. Create docker networks for the containers:  
+4. Open a terminal in the directory containing the docker-compose file.  
+5. Create docker networks for the containers:  
 
     ```shell
     docker network create Nextcloud
@@ -43,7 +52,7 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
     docker network create MariaDB
     ```  
 
-5. Start the containers:  
+6. Start the containers:  
 
     ```shell
     docker compose up -d
