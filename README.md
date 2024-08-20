@@ -26,7 +26,7 @@ A sample Docker Compose file for Nextcloud, Redis, and MariaDB.
     │   └── database/
     ```  
 
-3. Create a file called ```.env``` in the same directory as the Docker Compose file containing the following properties:  
+3. Create a file called `.env` in the same directory as the Docker Compose file containing the following properties:  
 
     ```properties
     DOCKER_VOLUMES=<PATH_TO_DOCKER_VOLUMES_FOLDER> # The folder created in the previous step.
