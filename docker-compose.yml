@@ -44,7 +44,7 @@ services:
 
   DB:
     container_name: DB
-    image: mariadb:latest
+    image: mariadb:lts-ubi
     restart: unless-stopped
     networks:
       - MariaDB
