@@ -20,10 +20,10 @@ services:
       - OVERWRITEHOST=${HOST}
       - OVERWRITEPROTOCOL=https
       - OVERWRITECLIURL=https://${HOST}
+      - SMTP_SECURE=${SMTP_SECURE}
       - SMTP_HOST=${SMTP_HOST}
-      - SMTP_SECURE=tls
-      - SMTP_PORT=587
-      - SMTP_NAME=${SMTP_USER}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_NAME=${SMTP_NAME}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - MAIL_FROM_ADDRESS=nextcloud
       - MAIL_DOMAIN=${MAIL_DOMAIN}
@@ -31,20 +31,23 @@ services:
       - PHP_UPLOAD_LIMIT=32G
       - APACHE_DISABLE_REWRITE_IP=1
       - APACHE_BODY_LIMIT=0
+      - FILEDROP_EMAIL_RECIPIENT=${FILEDROP_EMAIL_RECIPIENT}
+      - FILEDROP_SENDER_NAME=${FILEDROP_SENDER_NAME}
     depends_on:
       - DB
       - Redis
     volumes:
       - ${DOCKER_VOLUMES}/Nextcloud/data:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
     deploy:
       resources:
-        limits: 
-          cpus: '2.0'
+        limits:
+          cpus: "2.0"
           memory: 1GB
 
   DB:
     container_name: DB
-    image: mariadb:lts-ubi
+    image: mariadb:11.8-ubi
     restart: unless-stopped
     networks:
       - MariaDB
@@ -57,8 +60,8 @@ services:
       - ${DOCKER_VOLUMES}/Nextcloud/database:/var/lib/mysql
     deploy:
       resources:
-        limits: 
-          cpus: '1.0'
+        limits:
+          cpus: "1.0"
           memory: 512M
 
   Redis:
@@ -67,11 +70,10 @@ services:
     restart: unless-stopped
     networks:
       - Redis
-    command: redis-server
     deploy:
       resources:
-        limits: 
-          cpus: '0.75'
+        limits:
+          cpus: "0.75"
           memory: 512M
 
 networks:
