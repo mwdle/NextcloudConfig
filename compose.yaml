@@ -26,7 +26,7 @@ services:
       - SMTP_PORT=${SMTP_PORT}
       - SMTP_NAME=${SMTP_NAME}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - MAIL_FROM_ADDRESS=nextcloud
+      - MAIL_FROM_ADDRESS=noreply
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - PHP_MEMORY_LIMIT=512M
       - PHP_UPLOAD_LIMIT=32G
