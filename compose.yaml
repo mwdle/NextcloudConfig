@@ -6,16 +6,16 @@ services:
     restart: unless-stopped
     networks:
       - Nextcloud
-      - Redis
-      - MariaDB
+      - NextcloudCache
+      - NextcloudDB
     environment:
       - MYSQL_DATABASE=DB
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_HOST=DB
+      - MYSQL_HOST=NextcloudDB
       - NEXTCLOUD_ADMIN_USER=${ADMIN_USER}
       - NEXTCLOUD_ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - REDIS_HOST=Redis
+      - REDIS_HOST=NextcloudCache
       - NEXTCLOUD_TRUSTED_DOMAINS=${HOST}
       - TRUSTED_PROXIES=${TRUSTED_PROXIES}
       - OVERWRITEHOST=${HOST}
@@ -33,8 +33,8 @@ services:
       - APACHE_DISABLE_REWRITE_IP=1
       - APACHE_BODY_LIMIT=0
     depends_on:
-      - DB
-      - Redis
+      - NextcloudDB
+      - NextcloudCache
     volumes:
       - ${DOCKER_VOLUMES}/Nextcloud/data:/var/www/html
       - /etc/localtime:/etc/localtime:ro
@@ -44,12 +44,12 @@ services:
           cpus: "2.0"
           memory: 1GB
 
-  DB:
-    container_name: DB
+  NextcloudDB:
+    container_name: NextcloudDB
     image: mariadb:11.8-ubi
     restart: unless-stopped
     networks:
-      - MariaDB
+      - NextcloudDB
     environment:
       - MYSQL_DATABASE=DB
       - MYSQL_USER=${DB_USER}
@@ -63,12 +63,12 @@ services:
           cpus: "1.0"
           memory: 512M
 
-  Redis:
-    container_name: Redis
+  NextcloudCache:
+    container_name: NextcloudCache
     image: redis
     restart: unless-stopped
     networks:
-      - Redis
+      - NextcloudCache
     deploy:
       resources:
         limits:
@@ -77,11 +77,8 @@ services:
 
 networks:
   Nextcloud:
-    name: Nextcloud
     external: true
-  Redis:
-    name: Redis
+  NextcloudCache:
     external: true
-  MariaDB:
-    name: MariaDB
+  NextcloudDB:
     external: true
