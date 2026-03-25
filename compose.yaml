@@ -2,7 +2,7 @@ name: Nextcloud
 services:
   Nextcloud:
     container_name: Nextcloud
-    image: nextcloud
+    image: nextcloud:33.0.0-apache
     restart: unless-stopped
     networks:
       - Nextcloud
@@ -46,7 +46,7 @@ services:
 
   NextcloudDB:
     container_name: NextcloudDB
-    image: mariadb:11.8-ubi
+    image: mariadb:11.8.6-ubi9
     restart: unless-stopped
     networks:
       - NextcloudDB
@@ -65,14 +65,16 @@ services:
 
   NextcloudCache:
     container_name: NextcloudCache
-    image: redis
+    image: redis:8.6.1-alpine3.23@sha256:2afba59292f25f5d1af200496db41bea2c6c816b059f57ae74703a50a03a27d0
+    user: "${UID}:${GID}"
     restart: unless-stopped
+    command: redis-server --save ""
     networks:
       - NextcloudCache
     deploy:
       resources:
         limits:
-          cpus: "0.75"
+          cpus: "0.5"
           memory: 512M
 
 networks:
