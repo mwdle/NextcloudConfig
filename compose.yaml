@@ -2,7 +2,7 @@ name: Nextcloud
 services:
   Nextcloud:
     container_name: Nextcloud
-    image: nextcloud:33.0.0-apache
+    image: nextcloud:33.0.0-apache@sha256:666fd3f31c0865991d75e73369e4c074d304b782c937112f7614cd7ddc5ae089
     restart: unless-stopped
     networks:
       - Nextcloud
@@ -46,7 +46,7 @@ services:
 
   NextcloudDB:
     container_name: NextcloudDB
-    image: mariadb:11.8.6-ubi9
+    image: mariadb:11.8.6-ubi9@sha256:97fa4c834e2a1fc2b375ef00ec7891ae80c2b408cf11343c1c8ad1aa1655ac7e
     restart: unless-stopped
     networks:
       - NextcloudDB
