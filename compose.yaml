@@ -6,10 +6,10 @@ services:
     restart: unless-stopped
     networks:
       - Nextcloud
-      - NextcloudCache
       - NextcloudDB
+      - NextcloudCache
     environment:
-      - POSTGRES_DB=Nextcloud
+      - POSTGRES_DB=nextcloud
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_HOST=NextcloudDB
@@ -53,7 +53,7 @@ services:
       - NextcloudDB
     shm_size: 512M
     environment:
-      - POSTGRES_DB=Nextcloud
+      - POSTGRES_DB=nextcloud
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
