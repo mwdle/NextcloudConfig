@@ -65,25 +65,6 @@ services:
           cpus: "1.0"
           memory: 1GB
 
-  NextcloudDB_Old:
-    container_name: NextcloudDB_Old
-    image: mariadb:11.8.6-ubi9@sha256:97fa4c834e2a1fc2b375ef00ec7891ae80c2b408cf11343c1c8ad1aa1655ac7e
-    restart: unless-stopped
-    networks:
-      - NextcloudDB
-    environment:
-      - MYSQL_DATABASE=DB
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${DB_ADMIN_PASSWORD}
-    volumes:
-      - ${DOCKER_VOLUMES}/Nextcloud/database_old:/var/lib/mysql
-    deploy:
-      resources:
-        limits:
-          cpus: "1.0"
-          memory: 512M
-
   NextcloudCache:
     container_name: NextcloudCache
     image: redis:8.6.2-alpine3.23@sha256:81b6f81d6a6c5b9019231a2e8eb10085e3a139a34f833dcc965a8a959b040b72
