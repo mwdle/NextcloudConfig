@@ -9,10 +9,10 @@ services:
       - NextcloudCache
       - NextcloudDB
     environment:
-      - MYSQL_DATABASE=DB
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_HOST=NextcloudDB
+      - POSTGRES_DB=Nextcloud
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST=NextcloudDB
       - NEXTCLOUD_ADMIN_USER=${ADMIN_USER}
       - NEXTCLOUD_ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - REDIS_HOST=NextcloudCache
@@ -42,10 +42,31 @@ services:
       resources:
         limits:
           cpus: "2.0"
-          memory: 1GB
+          memory: 2GB
 
   NextcloudDB:
     container_name: NextcloudDB
+    image: postgres:18.3-alpine3.23@sha256:4da1a4828be12604092fa55311276f08f9224a74a62dcb4708bd7439e2a03911
+    user: "${UID}:${GID}"
+    restart: unless-stopped
+    networks:
+      - NextcloudDB
+    shm_size: 512M
+    environment:
+      - POSTGRES_DB=Nextcloud
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ${DOCKER_VOLUMES}/Nextcloud/database:/var/lib/postgresql
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1GB
+
+  NextcloudDB_Old:
+    container_name: NextcloudDB_Old
     image: mariadb:11.8.6-ubi9@sha256:97fa4c834e2a1fc2b375ef00ec7891ae80c2b408cf11343c1c8ad1aa1655ac7e
     restart: unless-stopped
     networks:
@@ -56,7 +77,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_ADMIN_PASSWORD}
     volumes:
-      - ${DOCKER_VOLUMES}/Nextcloud/database:/var/lib/mysql
+      - ${DOCKER_VOLUMES}/Nextcloud/database_old:/var/lib/mysql
     deploy:
       resources:
         limits:
