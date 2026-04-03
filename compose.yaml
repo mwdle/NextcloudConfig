@@ -31,7 +31,6 @@ services:
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - PHP_MEMORY_LIMIT=512M
       - PHP_UPLOAD_LIMIT=32G
-      - APACHE_DISABLE_REWRITE_IP=1
       - APACHE_BODY_LIMIT=0
     depends_on:
       - NextcloudDB
