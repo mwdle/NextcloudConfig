@@ -38,6 +38,8 @@ services:
     volumes:
       - ${DOCKER_VOLUMES}/Nextcloud/data:/var/www/html
       - /etc/localtime:/etc/localtime:ro
+      # Workaround for rootless permission issues (https://help.nextcloud.com/t/nextcloud-containerized-on-synology-with-changed-uid-gid/181714/4)
+      - ./overrides/redis-session.ini:/usr/local/etc/php/conf.d/redis-session.ini
     deploy:
       resources:
         limits:
