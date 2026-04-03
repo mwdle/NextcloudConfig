@@ -3,7 +3,6 @@ services:
   Nextcloud:
     container_name: Nextcloud
     image: nextcloud:33.0.1-apache@sha256:0b14848e05d19aa25e8a189eb9cfef4215489e0cbf5eb999e8784bf03027c226
-    user: "${UID}:${GID}"
     restart: unless-stopped
     networks:
       - Nextcloud
@@ -40,6 +39,11 @@ services:
       - /etc/localtime:/etc/localtime:ro
       # Workaround for rootless permission issues (https://help.nextcloud.com/t/nextcloud-containerized-on-synology-with-changed-uid-gid/181714/4)
       - ./overrides/redis-session.ini:/usr/local/etc/php/conf.d/redis-session.ini
+
+    user: "${UID}:${GID}"
+    security_opt:
+      - no-new-privileges:true
+
     deploy:
       resources:
         limits:
@@ -49,7 +53,6 @@ services:
   NextcloudDB:
     container_name: NextcloudDB
     image: postgres:18.3-alpine3.23@sha256:4da1a4828be12604092fa55311276f08f9224a74a62dcb4708bd7439e2a03911
-    user: "${UID}:${GID}"
     restart: unless-stopped
     networks:
       - NextcloudDB
@@ -61,6 +64,11 @@ services:
     volumes:
       - ${DOCKER_VOLUMES}/Nextcloud/database:/var/lib/postgresql
       - /etc/localtime:/etc/localtime:ro
+
+    user: "${UID}:${GID}"
+    security_opt:
+      - no-new-privileges:true
+
     deploy:
       resources:
         limits:
@@ -70,11 +78,15 @@ services:
   NextcloudCache:
     container_name: NextcloudCache
     image: redis:8.6.2-alpine3.23@sha256:81b6f81d6a6c5b9019231a2e8eb10085e3a139a34f833dcc965a8a959b040b72
-    user: "${UID}:${GID}"
     restart: unless-stopped
     command: redis-server --save ""
     networks:
       - NextcloudCache
+
+    user: "${UID}:${GID}"
+    security_opt:
+      - no-new-privileges:true
+
     deploy:
       resources:
         limits:
