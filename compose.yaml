@@ -52,13 +52,13 @@ services:
       - ALL
 
     logging:
-      driver: "journald"
+      driver: journald
     healthcheck:
       test: curl -fSs 'http://localhost/status.php' | grep '"installed":true' | grep '"maintenance":false' | grep '"needsDbUpgrade":false' || exit 1
       interval: 1m
       timeout: 5s
       retries: 3
-      start_period: 10s
+      start_period: 30s
 
     deploy:
       resources:
@@ -92,13 +92,13 @@ services:
       - ALL
 
     logging:
-      driver: "journald"
+      driver: journald
     healthcheck:
       test: pg_isready -U ${DB_USER} -d nextcloud || exit 1
       interval: 1m
       timeout: 5s
       retries: 3
-      start_period: 30s
+      start_period: 15s
 
     deploy:
       resources:
@@ -123,7 +123,7 @@ services:
       - ALL
 
     logging:
-      driver: "journald"
+      driver: journald
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 1m
