@@ -39,16 +39,33 @@ services:
       - /etc/localtime:/etc/localtime:ro
       # Workaround for rootless permission issues (https://help.nextcloud.com/t/nextcloud-containerized-on-synology-with-changed-uid-gid/181714/4)
       - ./overrides/redis-session.ini:/usr/local/etc/php/conf.d/redis-session.ini
+      # Allow read_only fs
+      - nextcloud_tmp:/tmp
 
     user: "${UID}:${GID}"
+    read_only: true
+    tmpfs:
+      - /var/run/apache2
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+    logging:
+      driver: "journald"
+    healthcheck:
+      test: curl -fSs 'http://localhost/status.php' | grep '"installed":true' | grep '"maintenance":false' | grep '"needsDbUpgrade":false' || exit 1
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
     deploy:
       resources:
         limits:
-          cpus: "2.0"
-          memory: 2GB
+          cpus: 2.25
+          memory: 1.5GB
+          pids: 100
 
   NextcloudDB:
     container_name: NextcloudDB
@@ -56,7 +73,7 @@ services:
     restart: unless-stopped
     networks:
       - NextcloudDB
-    shm_size: 512M
+    shm_size: 256M
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=${DB_USER}
@@ -66,14 +83,29 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
     user: "${UID}:${GID}"
+    read_only: true
+    tmpfs:
+      - /var/run/postgresql
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+    logging:
+      driver: "journald"
+    healthcheck:
+      test: pg_isready -U ${DB_USER} -d nextcloud || exit 1
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
     deploy:
       resources:
         limits:
-          cpus: "1.0"
-          memory: 1GB
+          cpus: 0.5
+          memory: 512M
+          pids: 30
 
   NextcloudCache:
     container_name: NextcloudCache
@@ -84,19 +116,35 @@ services:
       - NextcloudCache
 
     user: "${UID}:${GID}"
+    read_only: true
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+    logging:
+      driver: "journald"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: 512M
+          cpus: 0.25
+          memory: 256M
+          pids: 30
 
 networks:
   Nextcloud:
     external: true
-  NextcloudCache:
-    external: true
   NextcloudDB:
     external: true
+  NextcloudCache:
+    external: true
+
+volumes:
+  nextcloud_tmp:
