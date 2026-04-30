@@ -65,7 +65,7 @@ services:
         limits:
           cpus: 2.25
           memory: 1.5GB
-          pids: 100
+          pids: 250
 
   NextcloudDB:
     container_name: NextcloudDB
@@ -105,7 +105,7 @@ services:
         limits:
           cpus: 0.5
           memory: 512M
-          pids: 30
+          pids: 100
 
   NextcloudCache:
     container_name: NextcloudCache
@@ -136,7 +136,7 @@ services:
         limits:
           cpus: 0.25
           memory: 256M
-          pids: 30
+          pids: 100
 
 networks:
   Nextcloud:
