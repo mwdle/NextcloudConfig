@@ -2,7 +2,7 @@ name: Nextcloud
 services:
   Nextcloud:
     container_name: Nextcloud
-    image: nextcloud:33.0.3-apache@sha256:76f04e434a82572dbfee7ad6dca313229eade89ee538fccd2bf6396f4440d48b
+    image: nextcloud:33.0.3-apache@sha256:90a730e9a3dd290d9626ca64740c4d2fa901b4f231fe4ab6eb0dcf300dbc7271
     restart: unless-stopped
     networks:
       - Nextcloud
