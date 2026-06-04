@@ -82,6 +82,8 @@ services:
         condition: service_healthy
     volumes:
       - ${DOCKER_VOLUMES}/Nextcloud/data:/var/www/html
+      # Allow read_only fs
+      - nextcloud_tmp:/tmp
 
     logging:
       driver: journald
