@@ -65,9 +65,9 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 2.25
-          memory: 1.5GB
-          pids: 250
+          cpus: 3
+          memory: 3GB
+          pids: 256
 
   NextcloudCron:
     container_name: NextcloudCron
@@ -96,8 +96,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 1
-          memory: 1GB
+          cpus: 0.5
+          memory: 128MB
           pids: 100
 
   NextcloudDB:
