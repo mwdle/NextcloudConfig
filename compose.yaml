@@ -2,7 +2,7 @@ name: Nextcloud
 services:
   Nextcloud:
     container_name: Nextcloud
-    image: nextcloud:34.0.0-apache@sha256:22ac7959ef7183052857c265baacace1608f4ab4a52e21eccf4557ecdda969c1
+    image: nextcloud:34.0.0-apache@sha256:4d4a6b5ed15a7eb4537538c848eb78833f53bed62f93e7d5af144f360cd53ff2
     restart: unless-stopped
     networks:
       - Nextcloud
@@ -71,7 +71,7 @@ services:
 
   NextcloudCron:
     container_name: NextcloudCron
-    image: nextcloud:34.0.0-apache@sha256:22ac7959ef7183052857c265baacace1608f4ab4a52e21eccf4557ecdda969c1
+    image: nextcloud:34.0.0-apache@sha256:4d4a6b5ed15a7eb4537538c848eb78833f53bed62f93e7d5af144f360cd53ff2
     restart: unless-stopped
     entrypoint: /bin/sh -c 'while true; do php -f /var/www/html/cron.php; sleep 300; done'
     networks:
