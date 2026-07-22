@@ -75,6 +75,7 @@ services:
     restart: unless-stopped
     entrypoint: /bin/sh -c 'while true; do php -f /var/www/html/cron.php; sleep 300; done'
     networks:
+      - Nextcloud
       - NextcloudDB
       - NextcloudCache
     depends_on:
