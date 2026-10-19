@@ -48,7 +48,7 @@ Volume=./overrides/redis-session.ini:/usr/local/etc/php/conf.d/redis-session.ini
 
 ReadOnly=true
 ReadOnlyTmpfs=false
-Mount=type=tmpfs,destination=/var/run/apache2
+Tmpfs=/var/run/apache2
 
 User=www-data
 UserNS=auto
