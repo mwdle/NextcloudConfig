@@ -1,0 +1,35 @@
+[Container]
+Image=docker.io/library/redis:8.10.2-alpine3.23@sha256:3811787313eba226a2ef38658c6ccb91cd5e110edc89c37767de373120a0e5a0
+ContainerName=nextcloud-cache
+
+Network=nextcloud-cache.network
+
+ReadOnly=true
+ReadOnlyTmpfs=false
+
+User=redis
+UserNS=auto
+NoNewPrivileges=true
+DropCapability=all
+
+Exec=redis-server --save "" --maxmemory 192mb --maxmemory-policy allkeys-lru
+
+HealthStartupCmd=redis-cli ping
+HealthStartupInterval=5s
+HealthStartupTimeout=5s
+HealthCmd=redis-cli ping
+HealthInterval=60s
+HealthTimeout=5s
+HealthOnFailure=kill
+Notify=healthy
+
+Memory=256M
+PidsLimit=100
+
+[Service]
+CPUQuota=25%
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
