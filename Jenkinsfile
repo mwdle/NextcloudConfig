@@ -8,20 +8,20 @@ quadletPipeline(
         [
             type: 'usernamePassword',
             credentialsId: 'Nextcloud',
-            podmanSecretUsernameName: 'nextcloud_admin_username',
-            podmanSecretPasswordName: 'nextcloud_admin_password'
+            podmanSecretPasswordName: 'nextcloud_admin_password',
+            podmanSecretUsernameName: 'nextcloud_admin_username'
         ],
         [
             type: 'usernamePassword',
             credentialsId: 'nextcloud-db',
-            podmanSecretUsernameName: 'nextcloud_db_username',
-            podmanSecretPasswordName: 'nextcloud_db_password'
+            podmanSecretPasswordName: 'nextcloud_db_password',
+            podmanSecretUsernameName: 'nextcloud_db_username'
         ],
         [
             type: 'usernamePassword',
             credentialsId: 'Email noreply',
-            podmanSecretUsernameName: 'lab_smtp_username',
-            podmanSecretPasswordName: 'lab_smtp_password'
+            podmanSecretPasswordName: 'lab_smtp_password',
+            podmanSecretUsernameName: 'lab_smtp_username'
         ],
         [
             type: 'string',
