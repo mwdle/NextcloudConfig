@@ -10,8 +10,8 @@ Network=nextcloud.network
 Network=nextcloud-cache.network
 Network=nextcloud-db.network
 
-Volume=%h/containers/nextcloud/data:/var/www/html
-Volume=nextcloud-tmp:/tmp
+Volume=%h/containers/nextcloud/data:/var/www/html:z
+Volume=nextcloud-tmp:/tmp:z
 
 ReadOnly=true
 ReadOnlyTmpfs=false
