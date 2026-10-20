@@ -1,2 +1,3 @@
 [Network]
 NetworkName=nextcloud-db
+Internal=true
