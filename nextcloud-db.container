@@ -16,9 +16,8 @@ Volume=%h/containers/nextcloud/database:/var/lib/postgresql:U,Z
 
 ReadOnly=true
 ReadOnlyTmpfs=false
-Tmpfs=/dev/shm
-Tmpfs=/var/run/postgresql
-ShmSize=256M
+Tmpfs=/dev/shm:noexec,nosuid,size=256M
+Tmpfs=/var/run/postgresql:noexec,nosuid,size=32M
 
 User=1000
 Group=1000
