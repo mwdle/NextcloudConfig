@@ -20,6 +20,8 @@ Secret=lab_smtp_password,target=smtp_password,uid=33,gid=33,mode=0400
 Secret=lab_smtp_username,type=env,target=SMTP_NAME
 Secret=nextcloud_mail_domain,type=env,target=MAIL_DOMAIN
 
+Timezone=local
+
 Environment=APACHE_BODY_LIMIT=0
 Environment=MAIL_FROM_ADDRESS=noreply
 Environment=NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/nextcloud_password
@@ -39,7 +41,6 @@ Environment=SMTP_PORT=465
 Environment=SMTP_PASSWORD_FILE=/run/secrets/smtp_password
 Environment=SMTP_SECURE=ssl
 Environment=TRUSTED_PROXIES=10.89.0.0/16
-Environment=TZ=America/Denver
 
 Volume=%h/containers/nextcloud/data:/var/www/html:U,z
 Volume=nextcloud-tmp:/tmp:U,z

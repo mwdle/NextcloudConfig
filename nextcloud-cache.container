@@ -4,6 +4,8 @@ ContainerName=nextcloud-cache
 
 Network=nextcloud-cache.network
 
+Timezone=local
+
 ReadOnly=true
 ReadOnlyTmpfs=false
 

@@ -10,6 +10,8 @@ Network=nextcloud.network
 Network=nextcloud-cache.network
 Network=nextcloud-db.network
 
+Timezone=local
+
 Volume=%h/containers/nextcloud/data:/var/www/html:z
 Volume=nextcloud-tmp:/tmp:z
 
