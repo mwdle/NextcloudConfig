@@ -58,10 +58,10 @@ DropCapability=all
 
 Sysctl=net.ipv4.ip_unprivileged_port_start=80
 
-HealthStartupCmd=curl -fSs 'http://localhost/status.php' | grep '"installed":true' | grep '"maintenance":false' | grep '"needsDbUpgrade":false' || exit 1
+HealthStartupCmd=curl -fSs http://localhost/status.php | grep 'installed":true' | grep 'maintenance":false' | grep -q 'needsDbUpgrade":false' || exit 1
 HealthStartupInterval=5s
 HealthStartupTimeout=5s
-HealthCmd=curl -fSs 'http://localhost/status.php' | grep '"installed":true' | grep '"maintenance":false' | grep '"needsDbUpgrade":false' || exit 1
+HealthCmd=curl -fSs http://localhost/status.php | grep 'installed":true' | grep 'maintenance":false' | grep -q 'needsDbUpgrade":false' || exit 1
 HealthInterval=60s
 HealthTimeout=5s
 HealthOnFailure=kill
